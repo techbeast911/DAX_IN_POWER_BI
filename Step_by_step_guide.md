@@ -27,22 +27,22 @@ be the fact table lacked a relationship to the temperature table, so i had to cr
 in our internet sales table using calculated columns in power bi by joining 2 columns,one column from
 sales territory table and another from the date table.
 The related function in powerbi was used to accomplish this feet.
-    RELATED is a Power BI DAX function that allows you to fetch a value from a column in a related table. Crucially, 
-    this function only works if there's a relationship between the current table and the table where the desired column is located.
+        RELATED is a Power BI DAX function that allows you to fetch a value from a column in a related table. Crucially, 
+        this function only works if there's a relationship between the current table and the table where the desired column is located.
 
 ![image showing created temperature key column](https://github.com/techbeast911/DAX_IN_POWER_BI/blob/main/Img/Screenshot%202024-12-03%20122701.png)
 
 Further more in my sales territory region i used calculated columns to create a total transaction column
 for each sales territory region. the function countrows and related table were used to accomplish this.
-    the function countrows went to our internet sales table and counted the rows
-    for each time a sales territory region appeared.
+        the function countrows went to our internet sales table and counted the rows
+        for each time a sales territory region appeared.
 
 ![image showing total transactions column for each region](https://github.com/techbeast911/DAX_IN_POWER_BI/blob/main/Img/Screenshot%202024-12-03%20123818.png)
 
 Further in the sales territory region table, a region volume column was created, counting each total transaction
 for each region and binning them into either High, Medium or Low volume. this was done using the switch function in power bi
 
-    the switch function is used to evaluate a single condition across several possible matches
+        the switch function is used to evaluate a single condition across several possible matches
 
 ![region volume column](https://github.com/techbeast911/DAX_IN_POWER_BI/blob/main/Img/Screenshot%202024-12-03%20130049.png)
 
@@ -54,15 +54,15 @@ Calculated measures, also known as formula measures, are a feature in Power BI t
 All measures were created on the internet sales table.
 
 the first measure created was finding the amount of total sales. The sum function was used to achieve this.
-    the SUM function adds all the values in a single column to return the result.
+        the SUM function adds all the values in a single column to return the result.
 
 ![Image showing formula for creating total sales measure.](https://github.com/techbeast911/DAX_IN_POWER_BI/blob/main/Img/Screenshot%202024-12-03%20135410.png)
 
 The next measure which was created is the total cost . The sum function was used here as well.
-    Total cost = SUM('internet sales'[Total Production cost])
+        Total cost = SUM('internet sales'[Total Production cost])
 
 After that the total transaction measure was created, counting the number of all transactions.
-    total transactions= countrows('internet sales')
+        total transactions= countrows('internet sales')
 
 The measure of profit was created, subtracting the total cost from total sales
 
@@ -75,10 +75,10 @@ the divide function was used, then the measure was formatted into percentage
 
 the next measure created was for the total sales for all countries excluding any NA values.
 this was achieved using,the if statement,isblank function,calculate the all function in Power Bi
-    ISBLANK() function Checks whether a value is blank, and returns TRUE or FALSE.
-    CALCULATE function is It is defined as “evaluating an expression within a modified filter context.” 
-    An expression, which typically represents a measure, includes functions such as SUM, AVERAGE, and COUNT. 
-    This expression is evaluated in the context of one or more filters.
+        ISBLANK() function Checks whether a value is blank, and returns TRUE or FALSE.
+        CALCULATE function is It is defined as “evaluating an expression within a modified filter context.” 
+        An expression, which typically represents a measure, includes functions such as SUM, AVERAGE, and COUNT. 
+        This expression is evaluated in the context of one or more filters.
 
 ![measure showing sales for all countries](https://github.com/techbeast911/DAX_IN_POWER_BI/blob/main/Img/Screenshot%202024-12-04%20114936.png)
 
@@ -101,8 +101,8 @@ Then a measure for the total sales for United states and canada was created  usi
 ### Time series analysis under calculated measures
 
 a year to date measure was created using the totalytd function in powerbi
-    TotalYTD function Evaluates the specified expression over the interval which begins on the first day of the year and
-     ends with the last date in the specified date column after applying specified filters.
+        TotalYTD function Evaluates the specified expression over the interval which begins on the first day of the year and
+        ends with the last date in the specified date column after applying specified filters.
 
 ![image showing totalytd measure](https://github.com/techbeast911/DAX_IN_POWER_BI/blob/main/Img/Screenshot%202024-12-04%20131019.png)
 
@@ -116,12 +116,12 @@ A prior year sales measure was also created comparing years sales.
 ![image showing prior year sales](https://github.com/techbeast911/DAX_IN_POWER_BI/blob/main/Img/Screenshot%202024-12-05%20114037.png)
 
 Each week day was also calculated and summed to show the most profitable weekday
-    ytd sales(weekdays)=
-    totalytd(
-        [total sales],
-        'date'[date ],
-        'date'[day number of week] in {2,3,4,5,6}
-    )
+        ytd sales(weekdays)=
+        totalytd(
+            [total sales],
+            'date'[date ],
+            'date'[day number of week] in {2,3,4,5,6}
+        )
 
 ### Semi additive measures under calculated measures in power bi
  a semi-additive measure uses SUM to aggregate over some dimensions and a different aggregation over other dimensions 
