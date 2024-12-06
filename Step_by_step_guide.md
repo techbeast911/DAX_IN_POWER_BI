@@ -82,3 +82,55 @@ this was achieved using,the if statement,isblank function,calculate the all func
 
 ![measure showing sales for all countries](https://github.com/techbeast911/DAX_IN_POWER_BI/blob/main/Img/Screenshot%202024-12-04%20114936.png)
 
+
+The calculate function was used again to get the total sales specifically for just united states.
+
+![image showing total sales measure ofr united states](https://github.com/techbeast911/DAX_IN_POWER_BI/blob/main/Img/Screenshot%202024-12-04%20120251.png)
+
+The same measure was created for just canada
+
+Then a measure for the total sales for United states and canada was created  using the || to symbolize as or
+
+    Total sales (us & canada)= 
+    calculate(
+        [total sales],
+        'sales territory'[sales territory country]= "United States" ||
+        'sales territory'[sales territory country]= "Canada"
+    )
+
+### Time series analysis under calculated measures
+
+a year to date measure was created using the totalytd function in powerbi
+    TotalYTD function Evaluates the specified expression over the interval which begins on the first day of the year and
+     ends with the last date in the specified date column after applying specified filters.
+
+![image showing totalytd measure](https://github.com/techbeast911/DAX_IN_POWER_BI/blob/main/Img/Screenshot%202024-12-04%20131019.png)
+
+Fiscal year to date or ytd was created using dax functions in power bi, 
+selecting june 30th as our fiscal year
+
+![image showing fiscal year todate sales measure](https://github.com/techbeast911/DAX_IN_POWER_BI/blob/main/Img/Screenshot%202024-12-05%20111157.png)
+
+A prior year sales measure was also created comparing years sales.
+
+![image showing prior year sales](https://github.com/techbeast911/DAX_IN_POWER_BI/blob/main/Img/Screenshot%202024-12-05%20114037.png)
+
+Each week day was also calculated and summed to show the most profitable weekday
+    ytd sales(weekdays)=
+    totalytd(
+        [total sales],
+        'date'[date ],
+        'date'[day number of week] in {2,3,4,5,6}
+    )
+
+### Semi additive measures under calculated measures in power bi
+ a semi-additive measure uses SUM to aggregate over some dimensions and a different aggregation over other dimensions 
+
+ Trying to get the closing balance the inventory , a product inventory measure was created
+
+ ![image showing product inventory](https://github.com/techbeast911/DAX_IN_POWER_BI/blob/main/Img/Screenshot%202024-12-05%20121432.png)
+
+ A closing balance measure was created for each month using the calculate function and lastnonblank function
+    the LASTNONBLANK function returns only the months that closing balance is not blank
+
+![image showing closing balance measure](https://github.com/techbeast911/DAX_IN_POWER_BI/blob/main/Img/Screenshot%202024-12-05%20121902.png)
